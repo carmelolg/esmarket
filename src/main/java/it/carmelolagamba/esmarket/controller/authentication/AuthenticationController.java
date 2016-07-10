@@ -25,6 +25,7 @@ public class AuthenticationController {
 
 	@RequestMapping("/loginPage")
 	public String showLoginPage() {
+			
 		return "login";
 	}
 

@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.DetachedCriteria;
 
-import it.carmelolagamba.esmarket.domain.sales.Order;
 import it.carmelolagamba.esmarket.util.HibernateUtil;
 
 public abstract class GenericDaoImpl<T> implements GenericDAO<T> {
@@ -19,8 +18,9 @@ public abstract class GenericDaoImpl<T> implements GenericDAO<T> {
 	@SuppressWarnings("unchecked")
 	public GenericDaoImpl() {
 		type = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-	}
+	}	
 	
+	@Override
 	public T save(T object) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -39,6 +39,7 @@ public abstract class GenericDaoImpl<T> implements GenericDAO<T> {
 		return object;
 	}
 
+	@Override
 	public void update(T object) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -57,6 +58,7 @@ public abstract class GenericDaoImpl<T> implements GenericDAO<T> {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public void remove(Long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -75,6 +77,7 @@ public abstract class GenericDaoImpl<T> implements GenericDAO<T> {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public List<T> getAll() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -97,6 +100,8 @@ public abstract class GenericDaoImpl<T> implements GenericDAO<T> {
 	}
 
 	@SuppressWarnings("unchecked")
+
+	@Override
 	public T getById(Long id) {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -118,6 +123,7 @@ public abstract class GenericDaoImpl<T> implements GenericDAO<T> {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public List<T> findByCriteria(DetachedCriteria criteria) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
